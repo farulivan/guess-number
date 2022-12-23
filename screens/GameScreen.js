@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Alert } from 'react-native';
 
 import Colors from '../constants/colors';
@@ -19,23 +19,31 @@ const generateRandomBetween = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const GameScreen = ({ userNumber }) => {
+const GameScreen = ({ userNumber, onGameOver }) => {
   const initialState = generateRandomBetween(
-    minBoundary,
-    maxBoundary,
+    1,
+    100,
     userNumber
   );
   const [currentGuess, setCurrentGuess] = useState(initialState);
+
+  useEffect(() => {
+    if (currentGuess === userNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, userNumber, onGameOver]);
 
   const nextGuessNumber = (direction) => {
     if (
       (direction === 'lower' && currentGuess < userNumber) ||
       (direction === 'greater' && currentGuess > userNumber)
     ) {
-      Alert.alert("Don't Lie!!", "I know you're lying dude!", [{
-        text: 'Sorry',
-        style: 'cancel',
-      }]);
+      Alert.alert("Don't Lie!!", "I know you're lying dude!", [
+        {
+          text: 'Sorry',
+          style: 'cancel',
+        },
+      ]);
       return;
     }
 
@@ -52,6 +60,7 @@ const GameScreen = ({ userNumber }) => {
       maxBoundary,
       currentGuess
     );
+
     setCurrentGuess(newRndNumber);
     return;
   };
