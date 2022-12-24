@@ -10,8 +10,8 @@ export default Title;
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: 'linked-now',
     fontSize: 20,
-    fontWeight: 'bold',
     color: Colors.text500,
     textAlign: 'center',
   },

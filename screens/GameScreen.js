@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import Colors from '../constants/colors';
 import Title from '../components/ui/Title';
@@ -72,12 +73,16 @@ const GameScreen = ({ userNumber, onGameOver }) => {
           I think this is not your number. Is your number lower or greater?
         </InstructionText>
         <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={nextGuessNumber.bind(this, 'lower')}>
-            -
-          </PrimaryButton>
-          <PrimaryButton onPress={nextGuessNumber.bind(this, 'greater')}>
-            +
-          </PrimaryButton>
+          <View style={styles.button}>
+            <PrimaryButton onPress={nextGuessNumber.bind(this, 'lower')}>
+              <Ionicons name="md-remove" size={24} />
+            </PrimaryButton>
+          </View>
+          <View style={styles.button}>
+            <PrimaryButton onPress={nextGuessNumber.bind(this, 'greater')}>
+              <Ionicons name="md-add" size={24} />
+            </PrimaryButton>
+          </View>
         </View>
       </Card>
     </View>
@@ -99,8 +104,11 @@ const styles = StyleSheet.create({
     color: Colors.secondary600,
   },
   buttonContainer: {
-    marginTop: 20,
     flexDirection: 'row',
-    justifyContent: 'center',
+    marginTop: 18,
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

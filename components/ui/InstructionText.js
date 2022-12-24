@@ -10,7 +10,7 @@ export default InstructionText;
 
 const styles = StyleSheet.create({
   instructionText: {
-    fontWeight: 'bold',
+    fontFamily: 'rota-font',
     fontSize: 16,
     color: Colors.text500,
   },

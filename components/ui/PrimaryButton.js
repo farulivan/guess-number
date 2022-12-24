@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   text: {
+    fontFamily: 'rota-font',
     color: Colors.text500,
-    fontWeight: 'bold',
     textAlign: 'center',
   },
   // ios
