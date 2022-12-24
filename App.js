@@ -32,7 +32,7 @@ export default function App() {
 
   return (
     <LinearGradient
-      colors={[Colors.bgColor1, Colors.bgColor2]}
+      colors={[Colors.primary600, Colors.secondary600]}
       style={styles.rootScreen}
     >
       <ImageBackground

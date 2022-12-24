@@ -8,7 +8,7 @@ const PrimaryButton = ({ children, onPress }) => {
       <Pressable
         style={({ pressed }) =>
           pressed
-            ? [styles.outerContainer, styles.innerContainer]
+            ? [styles.innerContainer, styles.pressed ]
             : styles.innerContainer
         }
         onPress={onPress}
@@ -26,6 +26,13 @@ const styles = StyleSheet.create({
   outerContainer: {
     borderRadius: 40,
     overflow: 'hidden',
+    // android
+    elevation: 4,
+    // ios & android
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 6,
+    shadowOpacity: 0.25,
   },
   innerContainer: {
     width: 120,
@@ -37,7 +44,7 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   text: {
-    color: Colors.secondary500,
+    color: Colors.text500,
     fontWeight: 'bold',
     textAlign: 'center',
   },

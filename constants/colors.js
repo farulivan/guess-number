@@ -1,10 +1,10 @@
 const Colors = {
-  primary500: '#F2CB05',
-  primary600: '#B39504',
-  secondary500: '#405B66',
-  secondary600: '#30444D',
-  bgColor1: '#BF9B6F',
-  bgColor2: '#5863A6',
+  primary500: '#e5b55c',
+  primary600: '#B38D47',
+  secondary500: '#5E50E6',
+  secondary600: '#372E99',
+  text500: '#405B66',
+  text600: '#30444D',
 };
 
 export default Colors;
