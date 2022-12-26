@@ -14,6 +14,7 @@ SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [isGameOver, setIsGameOver] = useState(true);
+  const [guessCount, setGuessCount] = useState(0);
 
   const [fontsLoaded] = useFonts({
     'rota-font': require('./assets/fonts/Rota-Bold.otf'),
@@ -39,16 +40,25 @@ export default function App() {
     setIsGameOver(true);
   };
 
+  const newGameHandler = () => {
+    setUserNumber(null);
+    setGuessCount(0);
+  };
+
+  const roundsNumberHandler = () => {
+    setGuessCount((current) => current + 1)
+  }
+
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
 
   if (userNumber) {
     screen = (
-      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} onGuessCount={roundsNumberHandler} />
     );
   }
 
   if (isGameOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = <GameOverScreen userNumber={userNumber} roundsNumber={guessCount} onStartNewGame={newGameHandler} />;
   }
 
   return (
