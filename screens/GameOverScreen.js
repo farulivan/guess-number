@@ -5,7 +5,7 @@ import Card from '../components/ui/Card';
 import Colors from '../constants/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
 
-const GameOverScreen = ({roundsNumber, userNumber, onStartNewGame}) => {
+const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
   return (
     <View style={styles.rootContainer}>
       <Card style={styles.card}>
@@ -17,8 +17,10 @@ const GameOverScreen = ({roundsNumber, userNumber, onStartNewGame}) => {
           />
         </View>
         <Text style={styles.summaryText}>
-          The opponent needed <Text style={styles.highlightText}>{roundsNumber}</Text> rounds
-          to guess your number <Text style={styles.highlightText}>{userNumber}</Text>
+          The opponent needed{' '}
+          <Text style={styles.highlightText}>{roundsNumber}</Text> rounds to
+          guess your number{' '}
+          <Text style={styles.highlightText}>{userNumber}</Text>
         </Text>
         <PrimaryButton onPress={onStartNewGame}>Play Again</PrimaryButton>
       </Card>

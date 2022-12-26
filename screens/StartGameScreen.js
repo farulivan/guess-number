@@ -35,7 +35,9 @@ const StartGameScreen = ({ onPickNumber }) => {
     <View style={styles.rootContainer}>
       <Card>
         <Title style={styles.title}>Guess My Number</Title>
-        <InstructionText>Choose a number. If the opponent can guess your number you are lost.</InstructionText>
+        <InstructionText>
+          Choose a number. The opponent will try to guess your number.
+        </InstructionText>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputText}
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   inputText: {
     marginVertical: 8,

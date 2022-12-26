@@ -13,5 +13,6 @@ const styles = StyleSheet.create({
     fontFamily: 'rota-font',
     fontSize: 16,
     color: Colors.text500,
+    textAlign: 'center',
   },
 });
