@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Alert, FlatList } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 import Colors from '../constants/colors';
@@ -27,6 +33,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
   const initialState = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialState);
   const [guessLog, setGuessLog] = useState([initialState]);
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -72,26 +79,56 @@ const GameScreen = ({ userNumber, onGameOver }) => {
     return;
   };
 
+  //Implement different return code adapt to screen orientation
+  let content = (
+    <>
+      <NumberContainer>{currentGuess}</NumberContainer>
+      <InstructionText style={styles.dialog}>
+        I think this is not your number. Is your number lower or greater?
+      </InstructionText>
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <PrimaryButton onPress={nextGuessNumber.bind(this, 'lower')}>
+            <Ionicons name='md-remove' size={24} />
+          </PrimaryButton>
+        </View>
+        <View style={styles.button}>
+          <PrimaryButton onPress={nextGuessNumber.bind(this, 'greater')}>
+            <Ionicons name='md-add' size={24} />
+          </PrimaryButton>
+        </View>
+      </View>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        <InstructionText style={styles.dialog}>
+          I think this is not your number. Is your number lower or greater?
+        </InstructionText>
+        <View style={styles.buttonContainerWide}>
+          <View style={styles.button}>
+            <PrimaryButton onPress={nextGuessNumber.bind(this, 'lower')}>
+              <Ionicons name='md-remove' size={24} />
+            </PrimaryButton>
+          </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
+          <View style={styles.button}>
+            <PrimaryButton onPress={nextGuessNumber.bind(this, 'greater')}>
+              <Ionicons name='md-add' size={24} />
+            </PrimaryButton>
+          </View>
+        </View>
+      </>
+    );
+  }
+
   return (
     <View style={styles.rootContainer}>
       <Card>
         <Title>Opponent's Guess</Title>
-        <NumberContainer>{currentGuess}</NumberContainer>
-        <InstructionText style={styles.dialog}>
-          I think this is not your number. Is your number lower or greater?
-        </InstructionText>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <PrimaryButton onPress={nextGuessNumber.bind(this, 'lower')}>
-              <Ionicons name="md-remove" size={24} />
-            </PrimaryButton>
-          </View>
-          <View style={styles.button}>
-            <PrimaryButton onPress={nextGuessNumber.bind(this, 'greater')}>
-              <Ionicons name="md-add" size={24} />
-            </PrimaryButton>
-          </View>
-        </View>
+        {content}
         <View style={styles.flatListContainer}>
           <FlatList
             data={guessLog}
@@ -126,6 +163,10 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     marginTop: 18,
+  },
+  buttonContainerWide: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   button: {
     flex: 1,
