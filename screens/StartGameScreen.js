@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, TextInput, View, Alert } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Alert,
+  KeyboardAvoidingView,
+  ScrollView,
+} from 'react-native';
 
 import Colors from '../constants/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
@@ -32,39 +39,52 @@ const StartGameScreen = ({ onPickNumber }) => {
   };
 
   return (
-    <View style={styles.rootContainer}>
-      <Card>
-        <Title style={styles.title}>Guess My Number</Title>
-        <InstructionText>
-          Choose a number. The opponent will try to guess your number.
-        </InstructionText>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputText}
-            maxLength={2}
-            keyboardType="number-pad"
-            autoComplete="off"
-            autoCorrect={false}
-            onChangeText={numberInputHandler}
-            value={enteredNumber}
-          />
+    // in Course this code below used, but in this project better not use it
+    // <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} 
+        // you can try to use behaviour
+        // behavior='position'
+      >
+        <View style={styles.rootContainer}>
+          <Card>
+            <Title style={styles.title}>Guess My Number</Title>
+            <InstructionText>
+              Choose a number. The opponent will try to guess your number.
+            </InstructionText>
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.inputText}
+                maxLength={2}
+                keyboardType='number-pad'
+                autoComplete='off'
+                autoCorrect={false}
+                onChangeText={numberInputHandler}
+                value={enteredNumber}
+              />
+            </View>
+            <View style={styles.buttonsContainer}>
+              <View style={styles.button}>
+                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+              </View>
+              <View style={styles.button}>
+                <PrimaryButton onPress={confirmInputHandler}>
+                  Confirm
+                </PrimaryButton>
+              </View>
+            </View>
+          </Card>
         </View>
-        <View style={styles.buttonsContainer}>
-          <View style={styles.button}>
-            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-          </View>
-          <View style={styles.button}>
-            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-          </View>
-        </View>
-      </Card>
-    </View>
+      </KeyboardAvoidingView>
+    // </ScrollView>
   );
 };
 
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     margin: 24,

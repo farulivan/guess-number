@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  useWindowDimensions,
+} from 'react-native';
 import Title from '../components/ui/Title';
 
 import Card from '../components/ui/Card';
@@ -6,11 +12,25 @@ import Colors from '../constants/colors';
 import PrimaryButton from '../components/ui/PrimaryButton';
 
 const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
+  const { width, height } = useWindowDimensions();
+
+  const gameOverImageDimensions = height < 400 ? 100 : 280;
+  const gameOverImageRadius = height < 400 ? 50 : 140;
+
   return (
     <View style={styles.rootContainer}>
       <Card style={styles.card}>
         <Title>GAME OVER!</Title>
-        <View style={styles.imageContainer}>
+        <View
+          style={[
+            styles.imageContainer,
+            {
+              width: gameOverImageDimensions,
+              height: gameOverImageDimensions,
+              borderRadius: gameOverImageRadius,
+            },
+          ]}
+        >
           <Image
             style={styles.image}
             source={require('../assets/images/finish.jpg')}
@@ -30,6 +50,9 @@ const GameOverScreen = ({ roundsNumber, userNumber, onStartNewGame }) => {
 
 export default GameOverScreen;
 
+//this code only executed once when the component parsed for the first time, so using this kind of logic not a good solution for changing orientation
+// const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
@@ -40,11 +63,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   imageContainer: {
-    width: 280,
-    height: 280,
+    // width: deviceHeight < 400 ? 100 : 280,
+    // height: deviceHeight < 400 ? 100 : 280,
     overflow: 'hidden',
     //use BorderRadius half of width and height to make a circle
-    borderRadius: 140,
+    // borderRadius: deviceHeight < 400 ? 50 : 140,
     margin: 36,
   },
   image: {
