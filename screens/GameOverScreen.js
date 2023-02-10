@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 280,
     overflow: 'hidden',
+    //use BorderRadius half of width and height to make a circle
     borderRadius: 140,
     margin: 36,
   },

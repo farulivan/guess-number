@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
 import Colors from '../../constants/colors';
 
@@ -12,13 +12,21 @@ const NumberContainer = ({ children }) => {
 
 export default NumberContainer;
 
+// on Android,  'screen' below means weight & height including statusbar, 'window' exluding statusbar. on Ios, two of theme is the same
+
+const deviceWidth = Dimensions.get('screen').width;
+
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
-    marginHorizontal: 24,
-    padding: 16,
+    // marginTop: 20,
+    // marginHorizontal: 24,
+
+    //this is an example using devicewidth like media query in a web
+    padding: deviceWidth < 380 ? 12 : 24,
+    margin: deviceWidth < 380 ? 12 : 24,
+
     borderRadius: 8,
     backgroundColor: Colors.secondary500,
     // android
@@ -33,6 +41,8 @@ const styles = StyleSheet.create({
     color: Colors.primary500,
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 32,
+
+    //this is an example using devicewidth like media query in a web
+    fontSize: deviceWidth < 380 ? 12 : 36,
   },
 });
